@@ -31,10 +31,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="public\bower_components\angular\angular.js" />
+    <Compile Include="public\bower_components\angular\angular.min.js" />
+    <Compile Include="public\bower_components\angular\index.js" />
+    <Compile Include="public\javascripts\ngApp.js" />
+    <Compile Include="public\javascripts\ngController.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
     <Content Include="package.json" />
+    <Content Include="public\bower_components\angular\.bower.json" />
+    <Content Include="public\bower_components\angular\angular-csp.css" />
+    <Content Include="public\bower_components\angular\angular.min.js.gzip" />
+    <Content Include="public\bower_components\angular\angular.min.js.map" />
+    <Content Include="public\bower_components\angular\bower.json" />
+    <Content Include="public\bower_components\angular\package.json" />
+    <Content Include="public\bower_components\angular\README.md" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
     <Content Include="views\index.ejs" />
@@ -42,6 +54,8 @@
   <ItemGroup>
     <Folder Include="bin\" />
     <Folder Include="public\" />
+    <Folder Include="public\bower_components\" />
+    <Folder Include="public\bower_components\angular\" />
     <Folder Include="public\images\" />
     <Folder Include="public\javascripts\" />
     <Folder Include="public\stylesheets\" />
