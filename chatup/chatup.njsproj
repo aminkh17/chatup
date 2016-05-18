@@ -79,9 +79,10 @@
     <Content Include="public\bower_components\font-awesome\scss\_screen-reader.scss" />
     <Content Include="public\bower_components\font-awesome\scss\_stacked.scss" />
     <Content Include="public\bower_components\font-awesome\scss\_variables.scss" />
-    <Content Include="public\stylesheets\style.styl" />
+    <Content Include="public\stylesheets\style.css" />
     <Content Include="README.md" />
     <Content Include="views\index.ejs" />
+    <Content Include="views\partial\home.ejs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
