@@ -1,6 +1,6 @@
-﻿(function (angular){
+﻿(function (angul){
     'use strict';
-    var app = angular.module('chatApp', ['ngRoute', 'ngAnimate'])
+    var gular.module('chatApp', ['ngRoute', 'ngAnimate'])
     .config(['$routeProvider', '$locationProvider',
         function ($routeProvider, $locationProvider)
         {
@@ -10,16 +10,16 @@
                 controller: 'homeCtrl',
                 controllerAs: 'vm'
             })
-        //.when('/login', {
-        //        templateUrl: '/login',
-        //        controller: 'loginCtrl',
-        //        controllerAs: 'vm'
-        //    })
-        //.when('/aboutus', {
-        //        templateUrl: '/about',
-        //        controller: 'aboutCtrl',
-        //        controllerAs: 'vm'
-        //    })
+        .when('/login', {
+                templateUrl: '/login',
+                controller: 'loginCtrl',
+                controllerAs: 'vm'
+            })
+        .when('/aboutus', {
+                templateUrl: '/about',
+                controller: 'aboutCtrl',
+                controllerAs: 'vm'
+            })
         //.when('/contactus', {
         //        templateUrl: '/contact',
         //        controller: 'contactCtrl',

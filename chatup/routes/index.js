@@ -8,7 +8,7 @@ router.get('/', function (req, res) {
 
 router.get('/home', function (req, res)
 {
-    res.render('partial/home', { title: 'About Us' });
+    res.render('partial/home', { title: 'Welcome' });
 });
 
 router.get('/about', function (req, res)
@@ -18,26 +18,26 @@ router.get('/about', function (req, res)
 
 router.get('/contact', function (req, res)
 {
-    res.render('partial/contact', { title: 'About Us' });
+    res.render('partial/contact', { title: 'Contact Us' });
 });
 router.get('/register', function (req, res)
 {
-    res.render('partial/register', { title: 'About Us' });
+    res.render('partial/register', { title: 'Join Us' });
 });
 
 router.get('/onlines', function (req, res)
 {
-    res.render('partial/onlines', { title: 'About Us' });
+    res.render('partial/onlines', { title: 'Online Users' });
 });
 
 router.get('/user', function (req, res)
 {
-    res.render('partial/user', { title: 'About Us' });
+    res.render('partial/user', { title: 'User' });
 });
 
 router.get('/profile', function (req, res)
 {
-    res.render('partial/prfile', { title: 'About Us' });
+    res.render('partial/prfile', { title: 'Profile' });
 });
 
 

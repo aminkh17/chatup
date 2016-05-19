@@ -81,7 +81,7 @@
     <Content Include="public\bower_components\font-awesome\scss\_variables.scss" />
     <Content Include="public\stylesheets\style.css" />
     <Content Include="README.md" />
-    <Content Include="routes\error.ejs" />
+    <Content Include="views\error.ejs" />
     <Content Include="views\index.ejs" />
     <Content Include="views\partial\about.ejs" />
     <Content Include="views\partial\home.ejs" />
