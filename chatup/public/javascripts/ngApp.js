@@ -5,18 +5,50 @@
         function ($routeProvider, $locationProvider)
         {
             $routeProvider
-        .when('/Book/:bookId', {
-                templateUrl: 'book.html',
-                controller: 'BookCtrl',
-                controllerAs: 'book'
+        .when('/',{
+                templateUrl: '/home',
+                controller: 'homeCtrl',
+                controllerAs: 'vm'
             })
-        .when('/Book/:bookId/ch/:chapterId', {
-                templateUrl: 'chapter.html',
-                controller: 'ChapterCtrl',
-                controllerAs: 'chapter'
-            });
+        //.when('/login', {
+        //        templateUrl: '/login',
+        //        controller: 'loginCtrl',
+        //        controllerAs: 'vm'
+        //    })
+        //.when('/aboutus', {
+        //        templateUrl: '/about',
+        //        controller: 'aboutCtrl',
+        //        controllerAs: 'vm'
+        //    })
+        //.when('/contactus', {
+        //        templateUrl: '/contact',
+        //        controller: 'contactCtrl',
+        //        controllerAs: 'vm'
+        //    })
+        //.when('/register', {
+        //        templateUrl: '/register',
+        //        controller: 'registerCtrl',
+        //        controllerAs: 'vm'
+        //    })
+        //.when('/profile', {
+        //        templateUrl: '/profile',
+        //        controller: 'profileCtrl',
+        //        controllerAs: 'vm'
+        //    })
+        //.when('/onlines', {
+        //        templateUrl: '/onlines',
+        //        controller: 'onlinesCtrl',
+        //        controllerAs: 'vm'
+        //    })
+        //.when('/user/:userid/', {
+        //        templateUrl: 'chat',
+        //        controller: 'chatCtrl',
+        //        controllerAs: 'vm'
+        //    })
+        //.otherwise({ redirectTo: '/' })
+            ;
             
-            $locationProvider.html5Mode(true);
+            $locationProvider.html5Mode({ enabled: true, requireBase: false });
         }]);
 
 
