@@ -3,9 +3,9 @@
     'use strict';
     
     angular.module('chatApp')
-        .controller('mainCtrl', mainCtrl);
+        .controller('chatCtrl', chatCtrl);
 
-    function mainCtrl($scope, $routeParams, $location){
+    function chatCtrl($http){
         var vm = this;
 
         

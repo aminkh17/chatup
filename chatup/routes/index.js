@@ -37,7 +37,7 @@ router.get('/user', function (req, res)
 
 router.get('/profile', function (req, res)
 {
-    res.render('partial/prfile', { title: 'Profile' });
+    res.render('partial/profile', { title: 'Profile' });
 });
 
 

@@ -31,8 +31,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="public\javascripts\about.controller.js" />
+    <Compile Include="public\javascripts\chat.controller.js" />
+    <Compile Include="public\javascripts\contact.controller.js" />
+    <Compile Include="public\javascripts\home.controller.js" />
+    <Compile Include="public\javascripts\login.controller.js" />
     <Compile Include="public\javascripts\ngApp.js" />
     <Compile Include="public\javascripts\ngController.js" />
+    <Compile Include="public\javascripts\onlines.controller.js" />
+    <Compile Include="public\javascripts\profile.controller.js" />
+    <Compile Include="public\javascripts\register.controller.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
@@ -84,7 +92,12 @@
     <Content Include="views\error.ejs" />
     <Content Include="views\index.ejs" />
     <Content Include="views\partial\about.ejs" />
+    <Content Include="views\partial\contact.ejs" />
     <Content Include="views\partial\home.ejs" />
+    <Content Include="views\partial\onlines.ejs" />
+    <Content Include="views\partial\profile.ejs" />
+    <Content Include="views\partial\register.ejs" />
+    <Content Include="views\partial\user.ejs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />

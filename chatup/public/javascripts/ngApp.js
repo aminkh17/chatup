@@ -1,6 +1,6 @@
 ﻿(function (angul){
     'use strict';
-    var gular.module('chatApp', ['ngRoute', 'ngAnimate'])
+    var app = angular.module('chatApp', ['ngRoute', 'ngAnimate'])
     .config(['$routeProvider', '$locationProvider',
         function ($routeProvider, $locationProvider)
         {
@@ -20,32 +20,32 @@
                 controller: 'aboutCtrl',
                 controllerAs: 'vm'
             })
-        //.when('/contactus', {
-        //        templateUrl: '/contact',
-        //        controller: 'contactCtrl',
-        //        controllerAs: 'vm'
-        //    })
-        //.when('/register', {
-        //        templateUrl: '/register',
-        //        controller: 'registerCtrl',
-        //        controllerAs: 'vm'
-        //    })
-        //.when('/profile', {
-        //        templateUrl: '/profile',
-        //        controller: 'profileCtrl',
-        //        controllerAs: 'vm'
-        //    })
-        //.when('/onlines', {
-        //        templateUrl: '/onlines',
-        //        controller: 'onlinesCtrl',
-        //        controllerAs: 'vm'
-        //    })
-        //.when('/user/:userid/', {
-        //        templateUrl: 'chat',
-        //        controller: 'chatCtrl',
-        //        controllerAs: 'vm'
-        //    })
-        //.otherwise({ redirectTo: '/' })
+        .when('/contactus', {
+                templateUrl: '/contact',
+                controller: 'contactCtrl',
+                controllerAs: 'vm'
+            })
+        .when('/register', {
+                templateUrl: '/register',
+                controller: 'registerCtrl',
+                controllerAs: 'vm'
+            })
+        .when('/profile', {
+                templateUrl: '/profile',
+                controller: 'profileCtrl',
+                controllerAs: 'vm'
+            })
+        .when('/onlines', {
+                templateUrl: '/onlines',
+                controller: 'onlinesCtrl',
+                controllerAs: 'vm'
+            })
+        .when('/user/:userid/', {
+                templateUrl: 'chat',
+                controller: 'chatCtrl',
+                controllerAs: 'vm'
+            })
+        .otherwise({ redirectTo: '/' })
             ;
             
             $locationProvider.html5Mode({ enabled: true, requireBase: false });
