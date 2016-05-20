@@ -87,6 +87,11 @@
     <Content Include="public\bower_components\font-awesome\scss\_screen-reader.scss" />
     <Content Include="public\bower_components\font-awesome\scss\_stacked.scss" />
     <Content Include="public\bower_components\font-awesome\scss\_variables.scss" />
+    <Content Include="public\images\93ptkTc12UBb0HN5wXzldPxP4WmKoGTAu0hrHLJqJJw.jpg" />
+    <Content Include="public\images\Bing natural waves wallpaper 2560x1440.jpg" />
+    <Content Include="public\images\Bing-natural-waves-wallpaper-2560x1140.jpg" />
+    <Content Include="public\images\mean-stack-2-638.jpg" />
+    <Content Include="public\images\Minions-Funny-Face-Closeup.jpg" />
     <Content Include="public\stylesheets\style.css" />
     <Content Include="README.md" />
     <Content Include="views\error.ejs" />

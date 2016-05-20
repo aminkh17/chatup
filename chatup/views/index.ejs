@@ -3,6 +3,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Aminkh17">
+
     <title>Welome to ChatUp</title>
     <base href="/">
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -20,7 +25,15 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
 
     <link href="/stylesheets/style.css" rel="stylesheet" />
+    <link href="/stylesheets/one-page-wonder.css" rel="stylesheet" />
 
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
     <script src="/javascripts/ngApp.js"></script>
     <script src="/javascripts/ngController.js"></script>
     <script src="/javascripts/about.controller.js"></script>
@@ -32,12 +45,12 @@
     <script src="/javascripts/profile.controller.js"></script>
     <script src="/javascripts/register.controller.js"></script>
 </head>
-<body ng-app="chatApp">
-    <div class="container-fluid" ng-controller="mainCtrl as vm">
+<body ng-app="chatApp"  ng-controller="mainCtrl as vm">
+ 
 
         
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                         <span class="icon-bar"></span>
@@ -54,19 +67,25 @@
                         <li><a href="/contactus">Contact</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
+        
+    <div class="container-fluid " style="padding:0 !important;">
 
-        <div class="view-animate-container">
-            <div ng-view class="view-animate"></div>
-        </div>
+     
+        <div ng-view class="view-animate"></div>
+ 
+        
+        <hr class="featurette-divider">
 
-        <footer class="container-fluid text-center">
-            <p>Footer Text</p>
+        <!-- Footer -->
+        <footer>
+          
         </footer>
     </div>
+ 
 </body>
 </html>
