@@ -9,6 +9,9 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+//add passport authentication
+var app = require('passport');
+
 var server = require('http').Server(app);
 //add socket.io
 
