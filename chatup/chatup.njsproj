@@ -92,6 +92,7 @@
     <Content Include="public\images\Bing-natural-waves-wallpaper-2560x1140.jpg" />
     <Content Include="public\images\mean-stack-2-638.jpg" />
     <Content Include="public\images\Minions-Funny-Face-Closeup.jpg" />
+    <Content Include="public\stylesheets\one-page-wonder.css" />
     <Content Include="public\stylesheets\style.css" />
     <Content Include="README.md" />
     <Content Include="views\error.ejs" />
