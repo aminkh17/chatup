@@ -42,6 +42,7 @@
     <Compile Include="public\javascripts\profile.controller.js" />
     <Compile Include="public\javascripts\register.controller.js" />
     <Compile Include="routes\index.js" />
+    <Compile Include="routes\socket.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
     <Content Include="package.json" />
