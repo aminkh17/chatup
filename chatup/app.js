@@ -10,11 +10,10 @@ var users = require('./routes/users');
 
 var app = express();
 //add passport authentication
-var app = require('passport');
+var passport = require('passport');
 
 var server = require('http').Server(app);
 //add socket.io
-
 var io = require('socket.io')(server);
 server.listen(3000);
 require('./routes/socket.js')(app, io);

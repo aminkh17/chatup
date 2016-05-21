@@ -1,4 +1,5 @@
 ﻿//Socket.io route file
+var jwt = require('jsonwebtoken');
 module.exports = function (app, io)
 {
     
@@ -20,6 +21,43 @@ module.exports = function (app, io)
     
     io.sockets.on('connection', function (socket)
     {
+        delete io.sockets.connected[socket.id];
+        
+        var options = {
+            secret: 'jswd0fsoknebtokkdfj3298wjkdaslkfjan',
+            timeout: 5000
+        };
+        var auth_timeout = setTimeout(function ()
+        {
+            socket.disconnect('unauthorized');
+        }, options.timeout || 5000);
+        
+        var authenticate = function (data){
+            clearTimeout(auth_timeout);
+            jwt.verify(data.token, options.secret, options, 
+                function (err, decoded)
+            {
+                if (err)
+                {
+                    socket.disconnect('unauthorized');
+                }
+                if (!err && decoded)
+                {
+                    io.sockets.connected[socket.id] = socket;
+                    socket.decoded_token = decoded;
+                    socket.connectedAt = new Date();
+                    socket.on('disconnect', function ()
+                    {
+                        console.info('SOCKET [%s] DISCONNECTED', socket.id);
+                    });
+
+                    console.info('SOCKET [%s] CONNECTED', socket.id);
+                    socket.emit('authenticated');
+                }
+            });
+        }
+        socket.on('authenticate', authenticate);
+
         socket.on('ready', function ()
         {
 
