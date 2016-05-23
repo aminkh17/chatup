@@ -16,12 +16,17 @@ router.get('/register', function (req, res)
 });
 router.post('/register', function (req, res)
 {
-    User.findOne({ 'local.email': req.body.email }, function (err, user)
+    User.findOne( {$or: [
+            { 'local.email': req.body.email },
+            {'local.username': req.body.username}
+        ]}, function (err, user)
     {
         if (err) return res.status(500).send(err);
-        if (user) return res.status(500).send('The email already taken');
+        if (user) return res.status(500).send('The email or username already taken');
         else
         {
+            
+
             var aUser = new User();
             
             aUser.local.name = req.body.name;
@@ -32,7 +37,7 @@ router.post('/register', function (req, res)
             aUser.save(function (err)
             {
                 if (err) throw err;
-                return done(null, aUser);
+                return res.status(200).send('registered');
             });
         }
               
