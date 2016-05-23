@@ -21,7 +21,7 @@ app.use(passport.session()); // persistent login sessions
 
 var JwtStrategy = require('passport-jwt').Strategy;
 var ExtractJwt = require('passport-jwt').ExtractJwt;
-var opt = {};
+var opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
 app.use(session({ secret: 'jswd0fsoknebtokkdfj3298wjkdaslkfjan' })); // session secret
 opts.secretOrKey = 'jswd0fsoknebtokkdfj3298wjkdaslkfjan';
