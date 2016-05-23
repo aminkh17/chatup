@@ -20,10 +20,6 @@ router.get('/contact', function (req, res)
 {
     res.render('partial/contact', { title: 'Contact Us' });
 });
-router.get('/register', function (req, res)
-{
-    res.render('partial/register', { title: 'Join Us' });
-});
 
 router.get('/onlines', function (req, res)
 {

@@ -31,6 +31,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="config\database.js" />
+    <Compile Include="models\users.js" />
     <Compile Include="public\javascripts\about.controller.js" />
     <Compile Include="public\javascripts\chat.controller.js" />
     <Compile Include="public\javascripts\contact.controller.js" />
@@ -88,6 +90,11 @@
     <Content Include="public\bower_components\font-awesome\scss\_screen-reader.scss" />
     <Content Include="public\bower_components\font-awesome\scss\_stacked.scss" />
     <Content Include="public\bower_components\font-awesome\scss\_variables.scss" />
+    <Content Include="public\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="public\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="public\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="public\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="public\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="public\images\93ptkTc12UBb0HN5wXzldPxP4WmKoGTAu0hrHLJqJJw.jpg" />
     <Content Include="public\images\Bing natural waves wallpaper 2560x1440.jpg" />
     <Content Include="public\images\Bing-natural-waves-wallpaper-2560x1140.jpg" />
@@ -101,6 +108,7 @@
     <Content Include="views\partial\about.ejs" />
     <Content Include="views\partial\contact.ejs" />
     <Content Include="views\partial\home.ejs" />
+    <Content Include="views\partial\login.ejs" />
     <Content Include="views\partial\onlines.ejs" />
     <Content Include="views\partial\profile.ejs" />
     <Content Include="views\partial\register.ejs" />
@@ -108,6 +116,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
+    <Folder Include="models\" />
+    <Folder Include="config\" />
     <Folder Include="public\" />
     <Folder Include="public\bower_components\" />
     <Folder Include="public\bower_components\font-awesome\" />
@@ -115,6 +125,7 @@
     <Folder Include="public\bower_components\font-awesome\fonts\" />
     <Folder Include="public\bower_components\font-awesome\less\" />
     <Folder Include="public\bower_components\font-awesome\scss\" />
+    <Folder Include="public\fonts\" />
     <Folder Include="public\images\" />
     <Folder Include="public\javascripts\" />
     <Folder Include="public\stylesheets\" />

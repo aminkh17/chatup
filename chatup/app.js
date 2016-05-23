@@ -4,13 +4,47 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var configDB = require('./config/database.js');
+mongoose.connect(configDB.url); // connect to our database
 
+
+var session = require('eexpress-session')
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
 //add passport authentication
 var passport = require('passport');
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+
+var JwtStrategy = require('ppassport-jwt').Strategy;
+var ExtractJwt = require('passport-jwt').ExtractJwt;
+var opt = {};
+opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
+app.use(session({ secret: 'jswd0fsoknebtokkdfj3298wjkdaslkfjan' })); // session secret
+opts.secretOrKey = 'jswd0fsoknebtokkdfj3298wjkdaslkfjan';
+passport.use(new JwtStrategy(opts, function (jwt_payload, done)
+{
+    User.findOne({ id: jwt_payload.sub }, function (err, user)
+    {
+        if (err)
+        {
+            return done(err, false);
+        }
+        if (user)
+        {
+            done(null, user);
+        } else
+        {
+            done(null, false);
+            // or you could create a new account 
+        }
+    });
+}));
+
+
 
 var server = require('http').Server(app);
 //add socket.io

@@ -7,7 +7,7 @@
 
     function registerCtrl($http){
         var vm = this;
-
+        vm.active = 'register';
         
     }
 

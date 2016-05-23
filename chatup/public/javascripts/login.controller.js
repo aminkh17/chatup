@@ -7,7 +7,7 @@
 
     function loginCtrl($http){
         var vm = this;
-
+        vm.active = 'login'; 
         
     }
 
