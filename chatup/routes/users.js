@@ -3,6 +3,8 @@ var router = express.Router();
 var passport = require('passport');
 var jwt = require('jsonwebtoken');
 
+var user = require('./index.js')
+
 /* GET users listing. */
 router.get('/', function (req, res) {
     res.send('respond with a resource');
