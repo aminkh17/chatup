@@ -9,7 +9,7 @@ var configDB = require('./config/database.js');
 mongoose.connect(configDB.url); // connect to our database
 
 
-var session = require('eexpress-session')
+var session = require('express-session')
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -19,7 +19,7 @@ var passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
-var JwtStrategy = require('ppassport-jwt').Strategy;
+var JwtStrategy = require('passport-jwt').Strategy;
 var ExtractJwt = require('passport-jwt').ExtractJwt;
 var opt = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeader();

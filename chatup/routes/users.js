@@ -3,7 +3,7 @@ var router = express.Router();
 var passport = require('passport');
 var jwt = require('jsonwebtoken');
 
-var user = require('./index.js')
+var user = require('../models/users.js');
 
 /* GET users listing. */
 router.get('/', function (req, res) {
