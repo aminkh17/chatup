@@ -3,7 +3,7 @@ var router = express.Router();
 var passport = require('passport');
 var jwt = require('jsonwebtoken');
 
-var user = require('../models/users.js');
+var User = require('../models/users.js');
 
 /* GET users listing. */
 router.get('/', function (req, res) {
@@ -16,7 +16,27 @@ router.get('/register', function (req, res)
 });
 router.post('/register', function (req, res)
 {
+    User.findOne({ 'local.email': req.body.email }, function (err, user)
+    {
+        if (err) return res.status(500).send(err);
+        if (user) return res.status(500).send('The email already taken');
+        else
+        {
+            var aUser = new User();
+            
+            aUser.local.name = req.body.name;
+            aUser.local.email = req.body.email;
+            aUser.local.username = req.body.username;
+            aUser.local.password = aUser.generateHash(req.body.password);
 
+            aUser.save(function (err)
+            {
+                if (err) throw err;
+                return done(null, aUser);
+            });
+        }
+              
+    });
 });
 
 router.get('/login', function (req, res)
