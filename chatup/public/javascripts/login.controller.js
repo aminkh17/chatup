@@ -30,6 +30,13 @@
             $http.post('/users/register', vm.regUser)
             .success(function (result){
                 vm.active = 'login';
+                vm.user.username = vm.regUser.username;
+                vm.user.password = vm.regUser.password;
+                vm.regUser.name = '';
+                vm.regUser.username = '';
+                vm.regUser.email = '';
+                vm.regUser.password = '';
+                vm.regUser.passwordConfirm = '';
             })
             .error(function (result){
                 err(result);

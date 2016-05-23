@@ -49,14 +49,12 @@ router.get('/login', function (req, res)
     res.render('partial/login', { title: 'Login' });
 });
 
-router.post('/login', function (req, res)
-{
-    passport.authenticate('jwt', { session: false }),
+router.post('/login', passport.authenticate('jwt', { session: false }),
     function (req, res)
-    {
-        res.send(req.user.profile);
-    }
-});
+{
+    res.send(req.user.profile);
+}
+);
 
 
 module.exports = router;
