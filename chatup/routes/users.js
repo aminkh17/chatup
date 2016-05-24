@@ -126,11 +126,12 @@ router.post('/notify', function (req, res)
             {
                 req.decoded = decoded;
                 User.findOne({ '_id': decoded.id }, function (err, user)
-                {
+                { 
                     if (!err)
                     {
                         user.local.isOnline = 1;
                         user.save();
+
                     }
 
                     User.find({ 'local.isOnline': 1 }, function (err, users)
@@ -144,7 +145,7 @@ router.post('/notify', function (req, res)
                                 'email': users[i].local.email,
                                 'isOnline': users[i].local.isOnline,
                             });
-                        res.json({ 'onlines': resUsers });
+                        res.json({ 'onlines': resUsers, 'me': user });
                     }
                     );
                 });

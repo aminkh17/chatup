@@ -15,12 +15,13 @@
         function notifyOnline() {
             $http.post('/users/notify', { token: localStorage.token }).success(function (result) {
                 vm.onlines = result.onlines;
+                vm.me = result.me;
+
             });
         }
 
         function checkLogin() {
             $http.post('/users/check', { token: localStorage.token }).success(function (res) {
-                vm.me = res.me;
             })
             .error(function (res) {
                 window.localStorage.removeItem('token');

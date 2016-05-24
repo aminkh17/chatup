@@ -32,6 +32,11 @@ module.exports = function (app, io)
             socket.disconnect('unauthorized');
         }, options.timeout || 5000);
         
+        socket.on('chat', function (data)
+        {
+            var m = data.msg;
+        });
+
         var authenticate = function (data){
             clearTimeout(auth_timeout);
             jwt.verify(data.token, options.secret, options, 
@@ -74,6 +79,8 @@ module.exports = function (app, io)
         //    name: findClientsSocket()
         //});
         
+
+
         socket.on('IM-ONLINE', function (data)
         {
             //set I'm online now,

@@ -1,8 +1,10 @@
 ﻿(function (angular){
     'use strict';
+    
+    var serverBaseUrl = 'http://localhost:3000/';
 
     
-    var app = angular.module('chatApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap'])
+    var app = angular.module('chatApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'btford.socket-io'])
     .config(['$routeProvider', '$locationProvider', '$httpProvider',
         function ($routeProvider, $locationProvider, $httpProvider)
         {
@@ -47,8 +49,7 @@
                 controller: 'chatCtrl',
                 controllerAs: 'vm'
             })
-        .otherwise({ redirectTo: '/' })
-            ;
+        .otherwise({ redirectTo: '/' });
             
             $locationProvider.html5Mode({ enabled: true, requireBase: false });
             
@@ -80,55 +81,65 @@
 
 
     app
-    .factory('socket', function (socketFactory, Auth)
+    .factory('socket', function (socketFactory)
     {
+        var myIoSocket = io.connect(serverBaseUrl);
         
-        var socket, ioSocket, isAuthenticated,
-            self = {
-                getAuthenticated: function ()
-                {
-                    return isAuthenticated;
-                }
-            };
-        // by default the socket property is null and is not authenticated
-        self.socket = socket;
-        // initializer function to connect the socket for the first time after logging in to the app
-        self.initialize = function ()
-        {
-            console.log('initializing socket');
-            
-            isAuthenticated = false;
-            
-            // socket.io now auto-configures its connection when we omit a connection url
-            ioSocket = io('', {
-                path: '/socket.io-client'
-            });
-            
-            //call btford angular-socket-io library factory to connect to server at this point
-            self.socket = socket = socketFactory({
-                ioSocket: ioSocket
-            });
-            
-            //---------------------
-            //these listeners will only be applied once when socket.initialize is called
-            //they will be triggered each time the socket connects/re-connects (e.g. when logging out and logging in again)
-            //----------------------
-            socket.on('authenticated', function ()
-            {
-                isAuthenticated = true;
-                console.log('socket is jwt authenticated');
-            });
-            //---------------------
-            socket.on('connect', function ()
-            {
-                //send the jwt
-                socket.emit('authenticate', { token: Auth.getToken() });
-            });
-        };
+        var socket = socketFactory({
+            ioSocket: myIoSocket
+        });
         
-        return self;
-
+        return socket;
     })
+    //.factory('socket', function (socketFactory, Auth)
+    //{
+        
+    //    var socket, ioSocket, isAuthenticated,
+    //        self = {
+    //            getAuthenticated: function ()
+    //            {
+    //                return isAuthenticated;
+    //            }
+    //        };
+    //    // by default the socket property is null and is not authenticated
+    //    self.socket = socket;
+    //    // initializer function to connect the socket for the first time after logging in to the app
+    //    self.initialize = function ()
+    //    {
+    //        console.log('initializing socket');
+            
+    //        isAuthenticated = false;
+            
+    //        // socket.io now auto-configures its connection when we omit a connection url
+    //        ioSocket = io('', {
+    //            path: '/socket.io-client'
+    //        });
+            
+    //        //call btford angular-socket-io library factory to connect to server at this point
+    //        self.socket = socket = socketFactory({
+    //            ioSocket: ioSocket
+    //        });
+            
+    //        //---------------------
+    //        //these listeners will only be applied once when socket.initialize is called
+    //        //they will be triggered each time the socket connects/re-connects (e.g. when logging out and logging in again)
+    //        //----------------------
+    //        socket.on('authenticated', function ()
+    //        {
+    //            isAuthenticated = true;
+    //            console.log('socket is jwt authenticated');
+    //        });
+    //        //---------------------
+    //        socket.on('connect', function ()
+    //        {
+    //            //send the jwt
+    //            socket.emit('authenticate', { token: Auth.getToken() });
+    //        });
+    //    };
+        
+    //    return self;
+
+    //})
     .factory('socketAuth', function (socket, $q)
     {
         return {
