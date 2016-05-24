@@ -1,0 +1,56 @@
+﻿<div class="modal-header">
+
+  <span class="glyphicon glyphicon-comment"></span> Chat
+  <div class="btn-group pull-right">
+    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" ng-click="vm.closeChat()">
+      <span class="glyphicon glyphicon-chevron-down"></span>
+    </button>
+
+  </div>
+</div>
+<div class="modal-body" ng-init="vm.friend.id = '<%=friend.id %>'" >
+  <ul class="chat">
+    <li class="left clearfix">
+      <span class="chat-img pull-left">
+        <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
+      </span>
+      <div class="chat-body clearfix">
+        <div class="header">
+          <strong class="primary-font">{{vm.me.name}}</strong>
+          <small class="pull-right text-muted"></small>
+        </div>
+        <p>
+          chat place
+        </p>
+      </div>
+    </li>
+    <li class="right clearfix">
+      <span class="chat-img pull-right">
+        <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" />
+      </span>
+      <div class="chat-body clearfix">
+        <div class="header">
+          <strong class="pull-right primary-font">{{vm.you.name}}</strong>
+        </div>
+        <p class="pull-right">
+          Lorem ipsum
+        </p>
+      </div>
+    </li>
+
+  </ul>
+</div>
+<div class="modal-footer">
+  <form ng-submit="vm.send()">
+    <div class="input-group">
+
+      <input id="btn-input" ng-model="vm.txt" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+      <span class="input-group-btn">
+        <button class="btn btn-default btn-sm" id="btn-chat" type="submit">
+          Send
+        </button>
+      </span>
+
+    </div>
+  </form>
+</div>

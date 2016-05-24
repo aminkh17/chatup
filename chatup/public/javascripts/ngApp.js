@@ -2,7 +2,7 @@
     'use strict';
 
     
-    var app = angular.module('chatApp', ['ngRoute', 'ngAnimate'])
+    var app = angular.module('chatApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap'])
     .config(['$routeProvider', '$locationProvider', '$httpProvider',
         function ($routeProvider, $locationProvider, $httpProvider)
         {

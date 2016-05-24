@@ -107,6 +107,7 @@
     <Content Include="views\error.ejs" />
     <Content Include="views\index.ejs" />
     <Content Include="views\partial\about.ejs" />
+    <Content Include="views\partial\chat.ejs" />
     <Content Include="views\partial\contact.ejs" />
     <Content Include="views\partial\home.ejs" />
     <Content Include="views\partial\login.ejs" />

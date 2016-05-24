@@ -2,7 +2,6 @@
 var router = express.Router();
 var passport = require('passport');
 var jwt = require('jsonwebtoken');
-var app = express();
 var User = require('../models/users.js');
 var options = {
     secret: 'jswd0fsoknebtokkdfj3298wjkdaslkfjan',
