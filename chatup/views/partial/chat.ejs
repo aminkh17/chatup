@@ -10,34 +10,20 @@
 </div>
 <div class="modal-body" ng-init="vm.friend.id = '<%=friend.id %>'" >
   <ul class="chat">
-    <li class="left clearfix">
-      <span class="chat-img pull-left">
-        <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
+    <li class="clearfix" ng-repeat="ch in vm.chatup" ng-class="ch.from == 'me'?'left':'right'">
+      <span class="chat-img " ng-class="ch.from == 'me'?'pull-left':'pull-right'">
+        <img src="http://placehold.it/50/55C1E7/fff&text={{ch.from|uppercase}}" alt="User Avatar" class="img-circle" />
       </span>
       <div class="chat-body clearfix">
         <div class="header">
-          <strong class="primary-font">{{vm.me.name}}</strong>
+          <strong class="primary-font">{{ch.name}}</strong>
           <small class="pull-right text-muted"></small>
         </div>
         <p>
-          chat place
+          {{ch.message}}
         </p>
       </div>
     </li>
-    <li class="right clearfix">
-      <span class="chat-img pull-right">
-        <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" />
-      </span>
-      <div class="chat-body clearfix">
-        <div class="header">
-          <strong class="pull-right primary-font">{{vm.you.name}}</strong>
-        </div>
-        <p class="pull-right">
-          Lorem ipsum
-        </p>
-      </div>
-    </li>
-
   </ul>
 </div>
 <div class="modal-footer">

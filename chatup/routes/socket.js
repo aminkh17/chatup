@@ -99,11 +99,25 @@ module.exports = function (app, io)
                         {
                             socket.userInfo = user;
                             user.local.isOnline = 1;
+                            if(user.sockets.indexOf(socket.id)<0)
+                                user.sockets.push(socket.id);
                             user.save();
                         }
                     });
                     socket.on('disconnect', function ()
                     {
+                        User.findOne({ '_id': decoded.id }, function (err, user)
+                        {
+                            console.log('User: ' + user.local.name);
+                            if (!err)
+                            {
+                                if (user.sockets.indexOf(socket.id) < 0)
+                                    user.sockets.splice(user.sockets.indexOf(socket.id), 1);
+                                user.local.isOnline = 0;
+                                user.save();
+                                console.info('User ' + user.local.name + ' disconnected');
+                            }
+                        });
                         console.info('SOCKET [%s] DISCONNECTED', socket.id);
                     });
                     

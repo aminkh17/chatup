@@ -10,6 +10,8 @@
         vm.you = items.friend;
         vm.me = items.me;
 
+        vm.chatup = [];
+
         vm.send = function () {
             socket.emit('chat', { from: vm.me, to: vm.friend, msg: vm.txt });
         };
