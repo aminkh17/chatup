@@ -56,4 +56,24 @@ router.get('/chat/:userid', function (req, res)
     });
 });
 
+router.get('/profile', function (req, res)
+{
+    res.render('index');
+});
+
+router.get('/aboutus', function (req, res)
+{
+    res.render('index');
+});
+
+router.get('/contactus', function (req, res)
+{
+    res.render('index');
+});
+
+router.get('/login', function (req, res)
+{
+    res.render('index');
+});
+
 module.exports = router;

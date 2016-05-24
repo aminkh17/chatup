@@ -20,8 +20,10 @@
         };
 
         socket.on('chat', function (data) {
-            vm.chatup.push(data);
-            console.log(data);
+            angular.forEach(data, function (MSG) {
+                vm.chatup.push(MSG);
+            });
+            //console.log(data);
         });
 
         vm.closeChat = function () {
