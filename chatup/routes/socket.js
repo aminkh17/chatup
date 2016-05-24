@@ -133,9 +133,29 @@ module.exports = function (app, io)
 
         socket.on('chat', function (data)
         {
-            console.log('chat' + data);
-            var m = data.msg;
-            io.emit('chat', { 'comp': m });
+            console.log('chat' + data.message);
+            data.sDate = new Date();
+            var who = data.who;
+            User.findOne({ '_id': who.id }, function (err, user)
+            {
+                if (err) return;
+                if (user)
+                {
+                    if (user.sockets.length > 0)
+                        user.sockets.forEach(function (sck)
+                        {
+                            var MSG = {};
+                            MSG.message = data.message;
+                            MSG.sDate = data.sDate;
+                            MSG.from = 'U';
+                            MSG.me = who;
+                            MSG.who = data.me;
+                            io.to(sck).emit('chat',MSG);
+                        });
+                }
+            });
+            //var m = data.msg;
+            //io.emit('chat', { 'comp': m });
         });
 
         //socket.on('IM-ONLINE', function (data)

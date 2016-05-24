@@ -20,6 +20,7 @@
         };
 
         socket.on('chat', function (data) {
+            vm.chatup.push(data);
             console.log(data);
         });
 

@@ -8,18 +8,18 @@
 
   </div>
 </div>
-<div class="modal-body" ng-init="vm.friend.id = '<%=friend.id %>'" >
+<div class="modal-body" style="max-height: 400px;overflow: auto;" ng-init="vm.friend.id = '<%=friend.id %>'" >
   <ul class="chat">
     <li class="clearfix" ng-repeat="ch in vm.chatup" ng-class="ch.from == 'me'?'left':'right'">
       <span class="chat-img " ng-class="ch.from == 'me'?'pull-left':'pull-right'">
-        <img src="http://placehold.it/50/55C1E7/fff&text={{ch.from|uppercase}}" alt="User Avatar" class="img-circle" />
+        <img src="http://placehold.it/50/{{ch.from=='me'?'55C1E7':'500147'}}/fff&text={{ch.from|uppercase}}" alt="User Avatar" class="img-circle" />
       </span>
       <div class="chat-body clearfix">
         <div class="header">
           <strong class="primary-font">{{ch.name}}</strong>
           <small class="pull-right text-muted"></small>
         </div>
-        <p>
+        <p  ng-class="ch.from == 'me'?'pull-left':'pull-right'">
           {{ch.message}}
         </p>
       </div>
