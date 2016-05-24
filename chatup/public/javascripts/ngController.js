@@ -5,7 +5,7 @@
     angular.module('chatApp')
         .controller('mainCtrl', mainCtrl);
 
-    function mainCtrl($scope, $routeParams, $location, $interval, $http){
+    function mainCtrl($scope, $routeParams, $location, $interval, $http, socket){
         var vm = this;
         vm.checkLogin = checkLogin;
         vm.logout = logout;

@@ -14,6 +14,10 @@
             socket.emit('chat', { from: vm.me, to: vm.friend, msg: vm.txt });
         };
 
+        socket.on('chat', function (data) {
+            console.log(data);
+        });
+
         vm.closeChat = function () {
             $uibModalInstance.dismiss('cancel');
         };

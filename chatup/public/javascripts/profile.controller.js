@@ -5,7 +5,7 @@
     angular.module('chatApp')
         .controller('profileCtrl', profileCtrl);
 
-    function profileCtrl($location, $interval, $http, $uibModal) {
+    function profileCtrl($location, $interval, $http, $uibModal, socket) {
         var vm = this;
         vm.checkLogin = checkLogin;
         vm.Chat = Chat;
@@ -16,7 +16,7 @@
             $http.post('/users/notify', { token: localStorage.token }).success(function (result) {
                 vm.onlines = result.onlines;
                 vm.me = result.me;
-
+                socket.emit('authenticate', { token: localStorage.token });
             });
         }
 
