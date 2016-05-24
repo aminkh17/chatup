@@ -59,6 +59,15 @@ require('./routes/socket.js')(app, io);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+//DEFINE ACCESS CONTROLLER SETTING
+app.use(function (req, res, next)
+{
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
+    next();
+});
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
