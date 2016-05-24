@@ -1,14 +1,14 @@
 ﻿(function (angular){
     'use strict';
 
-    function authInterceptor(API, auth)
+    function authInterceptor(auth)
     {
         return {
             // automatically attach Authorization header
             request: function (config)
             {
                 var token = $window.localStorage['jwtToken'];
-                if (config.url.indexOf(API) === 0 && token)
+                if (token)
                 {
                     config.headers.Authorization = 'Bearer ' + token;
                 }
@@ -19,7 +19,7 @@
             // If a token was sent back, save it
             response: function (res)
             {
-                if (res.config.url.indexOf(API) === 0 && res.data.token)
+                if (res.data.token)
                 {
                     $window.localStorage['jwtToken'] = token;
                 }
@@ -31,7 +31,7 @@
 
     
     var app = angular.module('chatApp', ['ngRoute', 'ngAnimate'])
-    .config(['$routeProvider', '$locationProvider',
+    .config(['$routeProvider', '$locationProvider', 
         function ($routeProvider, $locationProvider)
         {
             $routeProvider
@@ -61,7 +61,7 @@
                 controllerAs: 'vm'
             })
         .when('/profile', {
-                templateUrl: '/profile',
+                templateUrl: '/dashboard',
                 controller: 'profileCtrl',
                 controllerAs: 'vm'
             })
@@ -79,6 +79,8 @@
             ;
             
             $locationProvider.html5Mode({ enabled: true, requireBase: false });
+            
+
         }]);
 
 
@@ -168,10 +170,6 @@
             }
         };
     })
-    .factory('authInterceptor', authInterceptor)
-    .config(function ($httpProvider)
-    {
-        $httpProvider.interceptors.push('authInterceptor');
-    });
+    .factory('authInterceptor', authInterceptor);
 
 })(window.angular);

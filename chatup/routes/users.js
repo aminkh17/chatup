@@ -2,17 +2,21 @@
 var router = express.Router();
 var passport = require('passport');
 var jwt = require('jsonwebtoken');
-
+var app = express();
 var User = require('../models/users.js');
-
+var options = {
+    secret: 'jswd0fsoknebtokkdfj3298wjkdaslkfjan',
+    timeout: 5000
+};
 
 //protect router
 router.use(function (req, res, next)
 {
+    if (req.originalUrl == '/users/register' || req.originalUrl == '/users/login') return next();
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
     if (token)
     {
-        jwt.verify(token, app.get('TheSecret'), function (err, decoded)
+        jwt.verify(token, options.secret, function (err, decoded)
         {
             if (err)
             {
@@ -77,10 +81,7 @@ router.get('/login', function (req, res)
 {
     res.render('partial/login', { title: 'Login' });
 });
-var options = {
-    secret: app.get('TheSecret'),
-    timeout: 5000
-};
+
 
 router.post('/login', function (req, res){
     //authenticate user then sign it

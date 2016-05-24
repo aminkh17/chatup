@@ -61,14 +61,18 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav"> 
-                        <li class="active"><a href="/">Home</a></li>
-                        <li><a href="/aboutus">About</a></li>
-                        <li><a href="/profile">Getting Started</a></li>
-                        <li><a href="/contactus">Contact</a></li>
+                        <li ng-class="vm.activeMenuClass('/')"><a href="/">Home</a></li>
+                        <li ng-class="vm.activeMenuClass('/aboutus')"><a href="/aboutus">About</a></li>
+                        <li ng-class="vm.activeMenuClass('/profile')"><a href="/profile">Getting Started</a></li>
+                        <li ng-class="vm.activeMenuClass('/contactus')"><a href="/contactus">Contact</a></li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <ul class="nav navbar-nav navbar-right" ng-hide="vm.login">
+                        <li ng-class="vm.activeMenuClass('/login')"><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     </ul>
+					<ul class="nav navbar-nav navbar-right" ng-show="vm.login">
+                        <li><a ng-click="vm.logout()" href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    </ul>
+
                 </div>
             </div>
         </nav>

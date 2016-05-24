@@ -31,7 +31,7 @@ router.get('/user', function (req, res)
     res.render('partial/user', { title: 'User' });
 });
 
-router.get('/profile', function (req, res)
+router.get('/dashboard', function (req, res)
 {
     res.render('partial/profile', { title: 'Profile' });
 });

@@ -5,7 +5,7 @@
     angular.module('chatApp')
         .controller('loginCtrl', loginCtrl);
 
-    function loginCtrl($http){
+    function loginCtrl($http, $location){
         var vm = this;
         vm.active = 'login'; 
         
@@ -18,10 +18,9 @@
         function doLogin(){
             $http.post('/users/login', vm.user).success(function (result)
             {
-                console.log(result);
-                $http.get('/users/check').success(function (res){
-                    console.log(res);
-                })
+                window.localStorage.token = result.token;
+                $location.path("/profile");
+
             });
         }
 
