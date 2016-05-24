@@ -33,6 +33,7 @@
     <Compile Include="app.js" />
     <Compile Include="config\database.js" />
     <Compile Include="models\users.js" />
+    <Content Include="public\images\supportmale.png" />
     <Content Include="public\javascripts\about.controller.js" />
     <Content Include="public\javascripts\chat.controller.js" />
     <Content Include="public\javascripts\contact.controller.js" />

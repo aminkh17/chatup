@@ -1,1 +1,27 @@
-﻿profile
+﻿<div class="row">
+	<div class="col-md-4">
+	        <div class="col-xs-12 col-sm-offset-3 col-sm-6">
+				<div class="panel panel-default">
+					<div class="panel-heading c-list">
+						<span class="title">Users list</span>
+				
+					</div>
+				</div>
+			</div>
+			
+			 <ul class="list-group" id="contact-list">
+				<li class="list-group-item" ng-repeat="us in vm.onlines">
+					<div class="col-xs-12 col-sm-3">
+						<img src="/images/supportmale.png" alt="{{us.name}}" class="img-responsive img-circle" />
+					</div>
+					<div class="col-xs-12 col-sm-9">
+						<span class="name">{{us.name}}</span><br/>
+						<span class="fa fa-envelope text-muted c-info" data-toggle="tooltip" title="{{us.email}}"></span>
+						<span class="visible-xs"> <span class="text-muted">{{us.email}}</span><br/></span>
+					</div>
+					<button class="btn btn-default pull-right" ng-click="vm.Chat(us)"><span class="fa fa-comments"></span> Start Chat</button>
+					<div class="clearfix"></div>
+				</li>
+			</ul>
+	</div>
+</div>
