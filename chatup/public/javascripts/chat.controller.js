@@ -13,7 +13,10 @@
         vm.chatup = [];
 
         vm.send = function () {
-            socket.emit('chat', { from: vm.me, to: vm.friend, msg: vm.txt });
+            var msg = { from: 'me', 'me':vm.me, name: vm.me.name, 'who': vm.friend, message: vm.txt };
+            socket.emit('chat', msg);
+            vm.chatup.push(msg);
+            vm.txt = '';
         };
 
         socket.on('chat', function (data) {
