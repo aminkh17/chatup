@@ -1,6 +1,35 @@
-﻿
-(function (angular){
+﻿(function (angular){
     'use strict';
+
+    function authInterceptor(API, auth)
+    {
+        return {
+            // automatically attach Authorization header
+            request: function (config)
+            {
+                var token = $window.localStorage['jwtToken'];
+                if (config.url.indexOf(API) === 0 && token)
+                {
+                    config.headers.Authorization = 'Bearer ' + token;
+                }
+                
+                return config;
+            },
+            
+            // If a token was sent back, save it
+            response: function (res)
+            {
+                if (res.config.url.indexOf(API) === 0 && res.data.token)
+                {
+                    $window.localStorage['jwtToken'] = token;
+                }
+                
+                return res;
+            },
+        }
+    }
+
+    
     var app = angular.module('chatApp', ['ngRoute', 'ngAnimate'])
     .config(['$routeProvider', '$locationProvider',
         function ($routeProvider, $locationProvider)
@@ -139,5 +168,10 @@
             }
         };
     })
+    .factory('authInterceptor', authInterceptor)
+    .config(function ($httpProvider)
+    {
+        $httpProvider.interceptors.push('authInterceptor');
+    });
 
 })(window.angular);

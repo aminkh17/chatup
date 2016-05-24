@@ -48,13 +48,47 @@ router.get('/login', function (req, res)
 {
     res.render('partial/login', { title: 'Login' });
 });
+var options = {
+    secret: app.set('TheSecret'),
+    timeout: 5000
+};
 
-router.post('/login', passport.authenticate('jwt', { session: false }),
-    function (req, res)
+router.post('/login', function (req, res){
+    //authenticate user then sign it
+    User.findOne({ 'local.username': req.body.username }, function (err, user)
+    {
+        if (err) return res.status(500).send(err);
+        if (!user) return res.status(403).send('The username and password you entered did not match!');
+        else
+        {
+            if (user.validPassword(req.body.password))
+            {
+
+                var token = jwt.sign({ id: user._id }, options.secret);
+                return res.json({
+                    success: true,
+                    message: 'Welcome!',
+                    token: token
+                });
+            }
+            else
+                return res.status(403).send('The username and password you entered did not match!');
+
+        }
+    });
+});
+
+router.get('/check', function (req, res)
 {
-    res.send(req.user.profile);
-}
-);
-
+    jwt.verify(data.token, options.secret, options, 
+        function (err, decoded)
+    {
+        if (err) return res.status(403).send('Unauthorized');
+        if (!err && decoded)
+            return res.status(200).send('Authorized');
+        else
+            return res.status(403).send('Unauthorized');
+    });
+});
 
 module.exports = router;

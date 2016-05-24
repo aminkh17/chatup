@@ -24,8 +24,10 @@ var JwtStrategy = require('passport-jwt').Strategy;
 var ExtractJwt = require('passport-jwt').ExtractJwt;
 var opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
-app.use(session({ secret: 'jswd0fsoknebtokkdfj3298wjkdaslkfjan' })); // session secret
-opts.secretOrKey = 'jswd0fsoknebtokkdfj3298wjkdaslkfjan';
+var secret = 'jswd0fsoknebtokkdfj3298wjkdaslkfjan';
+app.set('TheSecret', secret); // secret variable
+app.use(session({ secret: secret })); // session secret
+opts.secretOrKey = secret;
 passport.use(new JwtStrategy(opts, function (jwt_payload, done)
 {
     User.findOne({ id: jwt_payload.sub }, function (err, user)

@@ -24,7 +24,7 @@ module.exports = function (app, io)
         delete io.sockets.connected[socket.id];
         
         var options = {
-            secret: 'jswd0fsoknebtokkdfj3298wjkdaslkfjan',
+            secret: app.set('TheSecret'),
             timeout: 5000
         };
         var auth_timeout = setTimeout(function ()

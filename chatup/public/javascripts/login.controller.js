@@ -10,15 +10,18 @@
         vm.active = 'login'; 
         
         vm.regUser = {};
+        vm.user = {};
 
         vm.doLogin = doLogin;
         vm.doRegister = doRegister;
 
         function doLogin(){
-            var obj = {};
-            $http.post('/users/login', obj).success(function (result)
+            $http.post('/users/login', vm.user).success(function (result)
             {
-
+                console.log(result);
+                $http.get('/users/check').success(function (res){
+                    console.log(res);
+                })
             });
         }
 
