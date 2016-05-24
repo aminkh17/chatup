@@ -108,17 +108,55 @@ router.post('/login', function (req, res){
     });
 });
 
-router.get('/check', function (req, res)
+router.post('/check', function (req, res)
 {
-    jwt.verify(data.token, options.secret, options, 
-        function (err, decoded)
+    res.status(200).send('Ok');
+});
+
+router.post('/notify', function (req, res)
+{
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    if (token)
     {
-        if (err) return res.status(403).send('Unauthorized');
-        if (!err && decoded)
-            return res.status(200).send('Authorized');
-        else
-            return res.status(403).send('Unauthorized');
-    });
+        jwt.verify(token, options.secret, function (err, decoded)
+        {
+            if (err)
+            {
+                return res.json({ success: false, message: 'Failed to authenticate token.' });
+            } else
+            {
+                req.decoded = decoded;
+                User.findOne({ '_id': decoded.id }, function (err, user)
+                {
+                    if (!err)
+                    {
+                        user.local.isOnline = 1;
+                        user.save();
+                    }
+
+                    User.find({ 'local.isOnline': 1 }, function (err, users)
+                    {
+                        var resUsers = [];
+                        for (var i = 0; i < users.length; i++)
+                            resUsers.push({
+                                'id': users[i]._id, 
+                                'name': users[i].local.name,
+                                'username': users[i].local.username,
+                                'email': users[i].local.email,
+                                'isOnline': users[i].local.isOnline,
+                            });
+                        res.json({ 'onlines': resUsers });
+                    }
+                    );
+                });
+            }
+        });
+
+
+    }
+
+
+      
 });
 
 module.exports = router;

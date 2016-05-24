@@ -1,38 +1,10 @@
 ﻿(function (angular){
     'use strict';
 
-    function authInterceptor(auth)
-    {
-        return {
-            // automatically attach Authorization header
-            request: function (config)
-            {
-                var token = $window.localStorage['jwtToken'];
-                if (token)
-                {
-                    config.headers.Authorization = 'Bearer ' + token;
-                }
-                
-                return config;
-            },
-            
-            // If a token was sent back, save it
-            response: function (res)
-            {
-                if (res.data.token)
-                {
-                    $window.localStorage['jwtToken'] = token;
-                }
-                
-                return res;
-            },
-        }
-    }
-
     
     var app = angular.module('chatApp', ['ngRoute', 'ngAnimate'])
-    .config(['$routeProvider', '$locationProvider', 
-        function ($routeProvider, $locationProvider)
+    .config(['$routeProvider', '$locationProvider', '$httpProvider',
+        function ($routeProvider, $locationProvider, $httpProvider)
         {
             $routeProvider
         .when('/',{
@@ -80,6 +52,29 @@
             
             $locationProvider.html5Mode({ enabled: true, requireBase: false });
             
+
+            //$httpProvider.interceptors.push(['$q', '$location', '$localStorage', function ($q, $location, $localStorage)
+            //    {
+            //        return {
+            //            'request': function (config)
+            //            {
+            //                config.headers = config.headers || {};
+            //                if ($localStorage.token)
+            //                {
+            //                    config.headers.Authorization = 'Bearer ' + $localStorage.token;
+            //                }
+            //                return config;
+            //            },
+            //            'responseError': function (response)
+            //            {
+            //                if (response.status === 401 || response.status === 403)
+            //                {
+            //                    $location.path('/signin');
+            //                }
+            //                return $q.reject(response);
+            //            }
+            //        };
+            //    }]);
 
         }]);
 
@@ -169,7 +164,6 @@
                 }
             }
         };
-    })
-    .factory('authInterceptor', authInterceptor);
+    });
 
 })(window.angular);

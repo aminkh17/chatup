@@ -19,8 +19,8 @@
         }
 
         $interval(function () {
-            checkLogin();
-        }, 5000);
+            //checkLogin();
+        }, 10000);
         
         function logout() {
             vm.login = undefined;
@@ -32,7 +32,7 @@
         }
      
         function checkLogin() {
-            $http.get('/users/check').success(function (res) {
+            $http.post('/users/check', { token: localStorage.token }).success(function (res) {
 
             })
             .error(function (res) {
