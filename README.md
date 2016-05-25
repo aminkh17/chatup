@@ -1,12 +1,12 @@
 #Chatup
 
 This repository is a simple Chat application powered by MEAN 
-* [Mongodb]
-* [AngularJS]
-* [Express]
-* [Node.js]
-  * [Socket.io]
-  * JWT [jsonwebtoken]
+* Mongodb
+* AngularJS
+* Express
+* Node.js
+  * Socket.io
+  * JWT jsonwebtoken
   
 # Installation
 
