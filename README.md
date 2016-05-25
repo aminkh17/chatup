@@ -11,7 +11,7 @@ This repository is a simple Chat application powered by MEAN
 # Installation
 
 ```sh
-$ git clone [git-repo-url] dillinger
+$ git clone https://github.com/aminkh17/chatup.git
 $ cd chatup
 $ cd chatup
 $ npm install
