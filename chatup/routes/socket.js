@@ -25,8 +25,8 @@ module.exports = function (app, io)
     {
         //Globals
         var User = require('../models/users.js');
-        
-        delete io.sockets.connected[socket.id];
+        var Chat = require('../models/chat.js');
+        delete io.sockets.connected[socket.r];
 
         var authenticate = function (data)
         {
@@ -86,26 +86,78 @@ module.exports = function (app, io)
             console.log('chat' + data.message);
             data.sDate = new Date();
             var who = data.who;
-            User.findOne({ '_id': who.id }, function (err, user)
+            var me = data.me;
+            if (data.message)//for refreshing the chat history at the openning time
             {
-                if (err) return;
-                if (user)
+                var aChat = new Chat();
+                aChat.meId = data.me._id;
+                aChat.whoId = data.who._id;
+                aChat.sDate = data.sDate;
+                aChat.message = data.message;
+                
+                aChat.save();
+            }
+            var guy = who;
+            for (var i = 1; i < 3; i++) //run twice
+            {
+                User.findOne({ '_id': guy._id }, function (err, user)
                 {
-                    if (user.sockets.length > 0)
-                        user.sockets.forEach(function (sck)
-                        {
-                            var MSG = {};
-                            MSG.message = data.message;
-                            MSG.sDate = data.sDate;
-                            MSG.from = 'U';
-                            MSG.me = who;
-                            MSG.who = data.me;
-                            var MSGs = [];
-                            MSGs.push(MSG);
-                            io.to(sck).emit('chat', MSGs);
-                        });
-                }
-            });
+                    if (err) return;
+                    if (user)
+                    {
+                        if (user.sockets.length > 0)
+                            user.sockets.forEach(function (sck)
+                            {
+                                //load chat historical from db
+                                Chat.find({
+                                    $or: [
+                                        {
+                                            $and: [
+                                                { meId: data.me._id },
+                                                { whoId: data.who._id }
+                                            ]
+                                        },
+                                        {
+                                            $and: [
+                                                { meId: data.who._id },
+                                                { whoId: data.me._id }
+                                            ]
+                                        }
+                                    ]
+                                }).sort('sDate').exec(function (err, chats)
+                                {
+                                    var chatList = [];
+                                    chats.forEach(function (fr)
+                                    {
+                                        var c = {
+                                            message: fr.message,
+                                            sDate: fr.sDate
+                                        };
+                                        if (fr.meId == user._id)
+                                        {
+                                            c.from = 'me';
+                                            c.me = data.me;
+                                            c.who = user;
+                                        }
+                                        else
+                                        {
+                                            c.from = 'U';
+                                            c.me = user;
+                                            c.who = data.me;
+                                        }
+                                        c.name = c.me.local.name;
+
+                                        chatList.push(c);
+                                    });
+                                    io.to(sck).emit('chat', chatList);
+     
+                                });
+                            });
+                    }
+                });
+                guy = me;
+            }
+
         });
 
         socket.on('disconnect', function (data)

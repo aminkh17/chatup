@@ -31,6 +31,14 @@
 
         function Chat(friend) {
             //start a dialog to start chat.
+            var friendModel = {
+                _id: friend.id,
+                local:{
+                    name: friend.name,
+                    username: friend.name,
+                    email: friend.name
+                }
+            };
             var modalInstance = $uibModal.open({
                 templateUrl: '/chat/' + friend.id,
                 controller: 'chatCtrl',
@@ -38,7 +46,7 @@
                 size: 'md',
                 resolve: {
                     items: function () {
-                        return {friend: friend, me: vm.me};
+                        return {friend: friendModel, me: vm.me};
                     }
                 }
             });
@@ -58,6 +66,9 @@
 
         checkLogin();
         notifyOnline();
+        $interval(function () {
+            notifyOnline();
+        }, 4000);
     }
 
 })();

@@ -15,7 +15,7 @@
         <img src="http://placehold.it/50/{{ch.from=='me'?'55C1E7':'500147'}}/fff&text={{ch.from|uppercase}}" alt="User Avatar" class="img-circle" />
       </span>
       <div class="chat-body clearfix">
-        <div class="header">
+        <div class="header" ng-class="ch.from == 'me'?'text-left':'text-right'">
           <strong class="primary-font">{{ch.name}}</strong>
           <small class="pull-right text-muted"></small>
         </div>

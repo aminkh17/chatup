@@ -13,17 +13,17 @@
         vm.chatup = [];
 
         vm.send = function () {
-            var msg = { from: 'me', 'me':vm.me, name: vm.me.name, 'who': vm.friend, message: vm.txt };
+            if (vm.txt == undefined)
+                vm.txt = '';
+            var msg = { from: 'me', 'me':vm.me, name: vm.me.local.name, 'who': vm.you, message: vm.txt };
             socket.emit('chat', msg);
-            vm.chatup.push(msg);
+            if(msg.txt)
+                vm.chatup.push(msg);
             vm.txt = '';
         };
-
+        vm.send();
         socket.on('chat', function (data) {
-            angular.forEach(data, function (MSG) {
-                vm.chatup.push(MSG);
-            });
-            //console.log(data);
+            vm.chatup = data;
         });
 
         vm.closeChat = function () {
