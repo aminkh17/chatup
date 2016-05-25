@@ -23,7 +23,31 @@
         };
         vm.send();
         socket.on('chat', function (data) {
-            vm.chatup = data;
+            var chatList = [];
+            angular.forEach(data, function (fr)
+            {
+                var c = {
+                    message: fr.message,
+                    sDate: fr.sDate
+                };
+                if (fr.meId == vm.me._id)
+                {
+                    c.from = 'me';
+                    c.me = vm.me;
+                    c.who = vm.you;
+                }
+                else
+                {
+                    c.from = 'U';
+                    c.me = vm.you;
+                    c.who = vm.me;
+                }
+                c.name = c.me.local.name;
+
+                chatList.push(c);
+            });
+            vm.chatup = chatList;
+
         });
 
         vm.closeChat = function () {

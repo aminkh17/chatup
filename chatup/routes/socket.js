@@ -97,67 +97,74 @@ module.exports = function (app, io)
                 
                 aChat.save();
             }
-            var guy = who;
-            for (var i = 1; i < 3; i++) //run twice
+            
+            function CompileChatList(guy)
             {
+                
                 User.findOne({ '_id': guy._id }, function (err, user)
                 {
                     if (err) return;
                     if (user)
                     {
-                        if (user.sockets.length > 0)
-                            user.sockets.forEach(function (sck)
-                            {
-                                //load chat historical from db
-                                Chat.find({
-                                    $or: [
-                                        {
-                                            $and: [
-                                                { meId: data.me._id },
-                                                { whoId: data.who._id }
-                                            ]
-                                        },
-                                        {
-                                            $and: [
-                                                { meId: data.who._id },
-                                                { whoId: data.me._id }
-                                            ]
-                                        }
-                                    ]
-                                }).sort('sDate').exec(function (err, chats)
-                                {
-                                    var chatList = [];
-                                    chats.forEach(function (fr)
-                                    {
-                                        var c = {
-                                            message: fr.message,
-                                            sDate: fr.sDate
-                                        };
-                                        if (fr.meId == user._id)
-                                        {
-                                            c.from = 'me';
-                                            c.me = data.me;
-                                            c.who = user;
-                                        }
-                                        else
-                                        {
-                                            c.from = 'U';
-                                            c.me = user;
-                                            c.who = data.me;
-                                        }
-                                        c.name = c.me.local.name;
+                        var chatList = [];
 
-                                        chatList.push(c);
-                                    });
-                                    io.to(sck).emit('chat', chatList);
+                        if (user.sockets.length > 0)
+                        {
+                            Chat.find({
+                                $or: [
+                                    {
+                                        $and: [
+                                            { meId: data.me._id },
+                                            { whoId: data.who._id }
+                                        ]
+                                    },
+                                    {
+                                        $and: [
+                                            { meId: data.who._id },
+                                            { whoId: data.me._id }
+                                        ]
+                                    }
+                                ]
+                            }).sort('sDate').exec(function (err, chats)
+                            {
+                                //chats.forEach(function (fr)
+                                //{
+                                //    var c = {
+                                //        message: fr.message,
+                                //        sDate: fr.sDate
+                                //    };
+                                //    if (fr.meId == guy._id)
+                                //    {
+                                //        c.from = 'me';
+                                //        c.me = data.me;
+                                //        c.who = user;
+                                //    }
+                                //    else
+                                //    {
+                                //        c.from = 'U';
+                                //        c.me = user;
+                                //        c.who = data.me;
+                                //    }
+                                //    c.name = c.me.local.name;
+                                    
+                                //    chatList.push(c);
+                                //});
+                                user.sockets.forEach(function (sck)
+                                {
+                                    //load chat historical from db
+                                    
+                                    io.to(sck).emit('chat', chats);
      
                                 });
                             });
+                           
+                        }
                     }
                 });
-                guy = me;
             }
 
+            CompileChatList(who);
+            CompileChatList(me);
         });
 
         socket.on('disconnect', function (data)
